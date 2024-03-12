@@ -29,7 +29,13 @@ const Comments = () => {
                 <p><em>{comment.author}</em></p>
                 <p>Votes: {comment.votes}</p>
                 </div>
+                <div className="second-line">
                 <p>{comment.body}</p>
+                <div className="votes">
+                <button>⬆</button>
+                <button>⬇</button>
+                </div>
+                </div>
                 </div>
                 )
             })}
