@@ -186,3 +186,17 @@ h3 {
 .comment-container > h3 {
 	margin-left: 50px;
 }
+
+.article-votes-container {
+	flex-direction: column;
+	align-content: space-around;
+}
+
+.vote-btn-container {
+	color: white;
+}
+
+.article-votes-container {
+	display: flex;
+	align-items: center;
+}

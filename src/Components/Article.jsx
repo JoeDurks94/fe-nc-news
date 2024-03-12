@@ -32,7 +32,14 @@ const Article = () => {
 	};
 
 	const handleDownvote = (article_id) => {
-		downvoteArticle(article_id);
+		setArticle((currentArticle) => {
+			return { ...currentArticle, votes: currentArticle.votes - 1 };
+		});
+		downvoteArticle(article_id).catch(() => {
+			setArticle((currentArticle) => {
+				return { ...currentArticle, votes: currentArticle.votes + 1 };
+			});
+		});
 	};
 
 	return isLoading ? (
@@ -45,15 +52,16 @@ const Article = () => {
 				<p>
 					<em>Posted By: {article.author}</em>
 				</p>
-				<div className="votes-container">
+				<div className="article-votes-container">
 					<p>Votes: {article.votes}</p>
+					<div className="vote-btn-container">
 					<button
 						onClick={() => {
 							handleUpvote(article_id);
 						}}
 						className="votes-btn"
 					>
-						⬆
+						▲
 					</button>
 					<button
 						onClick={() => {
@@ -61,8 +69,9 @@ const Article = () => {
 						}}
 						className="votes-btn"
 					>
-						⬇
+						▼
 					</button>
+					</div>
 				</div>
 				<p>{article.body}</p>
 				{/* <p>{article}</p> */}

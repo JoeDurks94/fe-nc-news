@@ -50,12 +50,12 @@ const Comments = () => {
                                             handleUpvote(comment.comment_id)
                                     })} className="votes-btn"
 									>
-										⬆
+										▲
 									</button>
 									<button onClick={(() => {
                                         handleDownvote(comment.comment_id)
                                     })} className="votes-btn">
-										⬇
+										▼
 									</button>
 								</div>
 							</div>
