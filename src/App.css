@@ -121,7 +121,21 @@ h3 {
 }
 
 .article-container > p {
+	padding-top: 10px;
 	padding-left: 10vw;
 	padding-right: 10vw;
 	padding-bottom: 25px;
+}
+
+.comment {
+	padding: 10px 50px 10px 50px;
+	border: solid red 2px;
+	margin: 10px 50px 10px 50px;
+}
+
+.comment > .topline {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-bottom: 10px;
 }
