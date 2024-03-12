@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getArticleByArticleId } from "../utils/getArticleByArticleId";
+import Comments from "./Comments";
 
 const Article = () => {
 	const [isLoading, setIsLoading] = useState(true);
@@ -19,6 +20,7 @@ const Article = () => {
 	}, []);
 
 	return isLoading ? <p>Please wait, page is loading...</p> : (
+		<>
 		<div className="article-container">
 			<h2>{article.title}</h2>
 			<img className="img-article" src={article.article_img_url} />
@@ -26,6 +28,8 @@ const Article = () => {
 			<p>{article.body}</p>
 			{/* <p>{article}</p> */}
 		</div>
+		<Comments />
+		</>
 	)
 };
 
