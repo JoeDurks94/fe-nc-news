@@ -18,7 +18,7 @@ const Article = () => {
             })
 	}, []);
 
-	return isLoading ? <p>Page is loading... {console.log(article_id)}</p> : (
+	return isLoading ? <p>Please wait, page is loading...</p> : (
 		<div className="article-container">
 			<h2>{article.title}</h2>
 			<img className="img-article" src={article.article_img_url} />
