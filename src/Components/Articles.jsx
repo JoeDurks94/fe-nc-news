@@ -7,30 +7,33 @@ const Articles = () => {
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		setIsLoading(true)
-        getAllArticles()
-                .then((data) => {
-                    setArticles(data.articles);
-                })
-                .then(() => {
-                    setIsLoading(false);
-                });
+		setIsLoading(true);
+		getAllArticles()
+			.then((data) => {
+				setArticles(data.articles);
+			})
+			.then(() => {
+				setIsLoading(false);
+			});
 	}, []);
 
 	return isLoading ? (
-		<p>Please wait, articles are loading...</p>
+		<p>Please wait, page is loading...</p>
 	) : (
 		<>
 			<ul className="article-list">
 				{articles.map((article) => {
 					return (
-						<Link to ={`/articles/${article.article_id}`}>
-                            <div className="article-item">
-                                <img className="img-article-list" src={article.article_img_url} />
-                                <h3>{article.title}</h3>
-                                <p>Votes: {article.votes}</p>
-                            </div>
-                        </Link>
+						<Link to={`/articles/${article.article_id}`}>
+							<div className="article-item">
+								<img
+									className="img-article-list"
+									src={article.article_img_url}
+								/>
+								<h3>{article.title}</h3>
+								<p>Votes: {article.votes}</p>
+							</div>
+						</Link>
 					);
 				})}
 			</ul>
