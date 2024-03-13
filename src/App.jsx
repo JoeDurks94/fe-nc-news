@@ -9,6 +9,7 @@ import Article from "./Components/Article";
 import Articles from "./Components/Articles";
 import PostArticle from "./Components/PostArticle";
 import Users from "./Components/Users";
+import Comments from "./Components/Comments";
 
 function App() {
 	return (
@@ -19,7 +20,7 @@ function App() {
 				<Route path="/" element={<Home />}></Route>
 				<Route path="/topics" element={<Topics />}></Route>
 				<Route path="/articles" element={<Articles />}></Route>
-				<Route path="/articles/:article_id" element={<Article />}></Route>
+				<Route path="/articles/:article_id" element={<Article comments={Comments} />}></Route>
 				<Route
 					path="/articles/post_new_article"
 					element={<PostArticle />}
