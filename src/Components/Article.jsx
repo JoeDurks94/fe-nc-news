@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getArticleByArticleId } from "../utils/getArticleByArticleId";
 import { upvoteArticle, downvoteArticle } from "../utils/articleVotes";
 import Comments from "./Comments";
+import NewCommentForm from "./NewCommentForm";
 
 const Article = () => {
 	const [isLoading, setIsLoading] = useState(true);
@@ -52,31 +53,35 @@ const Article = () => {
 				<p>
 					<em>Posted By: {article.author}</em>
 				</p>
+				<p>
+					<em>Date Created: {new Date(article.created_at).toLocaleDateString()}</em>
+				</p>
 				<div className="article-votes-container">
 					<p>Votes: {article.votes}</p>
 					<div className="vote-btn-container">
-					<button
-						onClick={() => {
-							handleUpvote(article_id);
-						}}
-						className="votes-btn"
-					>
-						▲
-					</button>
-					<button
-						onClick={() => {
-							handleDownvote(article_id);
-						}}
-						className="votes-btn"
-					>
-						▼
-					</button>
+						<button
+							onClick={() => {
+								handleUpvote(article_id);
+							}}
+							className="votes-btn"
+						>
+							▲
+						</button>
+						<button
+							onClick={() => {
+								handleDownvote(article_id);
+							}}
+							className="votes-btn"
+						>
+							▼
+						</button>
 					</div>
 				</div>
 				<p>{article.body}</p>
-				{/* <p>{article}</p> */}
 			</div>
+			<div className="comment-container">
 			<Comments />
+			</div>
 		</>
 	);
 };

@@ -6,22 +6,14 @@ const NCNews = axios.create({
 
 export const upvoteComment = (comment_id) => {
     return NCNews
-    .patch(`/articles/${comment_id}`)
-    .send({
-        inc_votes: 1
-    })
-    .then((res) => {
-        return res.data.votes + 1
-    })
+    .patch(`/comments/${comment_id}`, {
+		inc_votes: 1,
+	});
 }
 
 export const downvoteComment = (comment_id) => {
     return NCNews
-    .patch(`/articles/${comment_id}`)
-    .send({
-        inc_votes: 1
-    })
-    .then((res) => {
-        return res.data.votes + 1
-    })
+    .patch(`/comments/${comment_id}`, {
+		inc_votes: -1,
+	});
 }

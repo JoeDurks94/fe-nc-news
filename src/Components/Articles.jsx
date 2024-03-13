@@ -21,11 +21,11 @@ const Articles = () => {
 		<p>Please wait, page is loading...</p>
 	) : (
 		<>
-			<ul className="article-list">
+			<div className="article-list">
 				{articles.map((article) => {
 					return (
-						<Link to={`/articles/${article.article_id}`}>
-							<div className="article-item">
+						<Link key={article.article_id} to={`/articles/${article.article_id}`}>
+							<div  className="article-item">
 								<img
 									className="img-article-list"
 									src={article.article_img_url}
@@ -36,7 +36,7 @@ const Articles = () => {
 						</Link>
 					);
 				})}
-			</ul>
+			</div>
 		</>
 	);
 };
