@@ -148,7 +148,8 @@ h3 {
 .votes-container {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	margin-left: auto;
+	margin-right: 0px;
 }
 
 @media screen and (max-width: 1000px) {
@@ -176,7 +177,6 @@ h3 {
 
 .second-line {
 	display: flex;
-	justify-content: space-between;
 }
 
 .comment-container {
@@ -245,4 +245,31 @@ select {
 .success-comment-msg {
 	color: black;
 	justify-content: center;
+}
+
+.delete-btn {
+	margin-right: 10px;
+	background-color: red;
+	border: none;
+	border-radius: 10px;
+	text-decoration: none;
+	font-size: 25px;
+	max-width: 35px;
+	max-height: 35px;
+	min-width: 35px;
+	min-height: 35px;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.delete-msg {
+	display: flex;
+	justify-content: center;
+	align-self: center;
+}
+
+.comment-body {
+	display: flex;
+	align-items: left;
+	justify-self: left;
 }

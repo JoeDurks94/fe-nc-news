@@ -3,11 +3,10 @@ import { getAllUsers } from "../utils/getAllUsers";
 import { postComment } from "../utils/postComment";
 import { useParams } from "react-router-dom";
 
-const NewCommentForm = ({ setComments }) => {
+const NewCommentForm = ({ setComments, setSelectedUser, selectedUser }) => {
 	const [isLoading, setIsLoading] = useState(true);
-	const [users, setUsers] = useState({});
+	const [users, setUsers] = useState([]);
 	const [newComment, setNewComment] = useState("");
-	const [selectedUser, setSelectedUser] = useState("");
 	const [submitted, setSubmitted] = useState(false);
 	const { article_id } = useParams();
 
@@ -18,9 +17,7 @@ const NewCommentForm = ({ setComments }) => {
 				setUsers(data.users);
 			})
 			.then(() => {
-				setTimeout(() => {
-					setIsLoading(false);
-				}, 2000);
+				setIsLoading(false);
 			});
 	}, []);
 
@@ -35,12 +32,14 @@ const NewCommentForm = ({ setComments }) => {
 			.then((posted) => {
 				setComments((currentComments) => {
 					return [posted.data, ...currentComments];
-				});
+				})
 				setSelectedUser({});
 				setNewComment("");
 			})
 			.then(() => {
-				setSubmitted(false);
+				setTimeout(() => {
+					setSubmitted(false);
+				}, 1500);
 			});
 	};
 
