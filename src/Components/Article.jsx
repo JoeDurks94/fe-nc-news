@@ -54,7 +54,9 @@ const Article = () => {
 					<em>Posted By: {article.author}</em>
 				</p>
 				<p>
-					<em>Date Created: {new Date(article.created_at).toLocaleDateString()}</em>
+					<em>
+						Date Created: {new Date(article.created_at).toLocaleDateString()}
+					</em>
 				</p>
 				<div className="article-votes-container">
 					<p>Votes: {article.votes}</p>
@@ -80,7 +82,7 @@ const Article = () => {
 				<p>{article.body}</p>
 			</div>
 			<div className="comment-container">
-			<Comments />
+				<Comments />
 			</div>
 		</>
 	);

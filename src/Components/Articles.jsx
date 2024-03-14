@@ -18,14 +18,20 @@ const Articles = () => {
 	}, []);
 
 	return isLoading ? (
-		<p>Please wait, page is loading...</p>
+		<>
+			<p>Please wait, page is loading...</p>
+		</>
 	) : (
 		<>
+			<h2>Articles</h2>
 			<div className="article-list">
 				{articles.map((article) => {
 					return (
-						<Link key={article.article_id} to={`/articles/${article.article_id}`}>
-							<div  className="article-item">
+						<Link
+							key={article.article_id}
+							to={`/articles/${article.article_id}`}
+						>
+							<div className="article-item">
 								<img
 									className="img-article-list"
 									src={article.article_img_url}

@@ -2,9 +2,9 @@ import React from 'react';
 
 const Topics = () => {
     return (
-        <div>
-            
-        </div>
+        <>
+            <h2>Topics</h2>
+        </>
     );
 };
 
