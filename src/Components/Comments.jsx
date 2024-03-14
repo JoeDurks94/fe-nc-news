@@ -77,8 +77,8 @@ const Comments = () => {
 	) : (
 		<>
 		<h3>Comments</h3>
-			<NewCommentForm setSelectedUser={setSelectedUser} selectedUser={selectedUser} setComments={setComments} />
 			<p className="delete-msg">In order to delete comments please select your username from the dropdown below</p>
+			<NewCommentForm setSelectedUser={setSelectedUser} selectedUser={selectedUser} setComments={setComments} />
 				{comments.map((comment) => {
 					return (
 						<div key={comment.comment_id} className="comment">
