@@ -24,14 +24,27 @@ const App = () => {
 		});
 	}, []);
 
-	return isLoading ? <p>Please Wait...</p> : (
+	return isLoading ? (
+		<>
+			<Header />
+			<NavBar />
+			<p>Please Wait...</p>
+		</>
+	) : (
 		<>
 			<Header />
 			<NavBar />
 			<Routes>
 				<Route path="/" element={<Home />}></Route>
 				{topics.map((topic) => {
-					return <Route path={"/:topic"} element={<Topic />} topic={topic}></Route>;
+					return (
+						<Route
+							path={"/topics/:topic"}
+							element={<Topic />}
+							topic={topic}
+							key={topic}
+						></Route>
+					);
 				})}
 				<Route path="/topics" element={<Topics topics={topics} />}></Route>
 				<Route path="/articles" element={<Articles />}></Route>
