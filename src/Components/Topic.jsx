@@ -1,30 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getQueryArticles } from '../utils/getQueryArticles';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getQueryArticles } from "../utils/getQueryArticles";
+import { Link } from "react-router-dom";
 
 const Topic = () => {
-    const { topic } = useParams()
-    const [isLoading, setIsLoading] = useState(true);
-    const [articleTopic, setArticleTopic] = useState('')
-    const [articles, setArticles] = useState({})
+	const { topic } = useParams();
+	const [isLoading, setIsLoading] = useState(true);
+	const [articles, setArticles] = useState({});
 
-    useEffect(() => {
-        setIsLoading(true)
-        setArticleTopic(topic)
-                getQueryArticles("?topic=" + topic )
-        .then((data) => {
-                setArticles(data.articles)
-        })
-        .then(() => {
-            setIsLoading(false)
-        })
-    }, [])
+	useEffect(() => {
+		setIsLoading(true);
+		getQueryArticles("?topic=" + topic)
+			.then((data) => {
+				setArticles(data.articles);
+			})
+			.then(() => {
+				setIsLoading(false);
+			});
+	}, []);
 
-    return isLoading ? <p>Please wait page is loading</p> : (
-        <div>
-            <h2>{topic.charAt(0).toUpperCase() + topic.slice(1)}</h2>
-            <div className="article-list">
+	return isLoading ? (
+		<p>Please wait page is loading</p>
+	) : (
+		<div>
+			<h2>{topic.charAt(0).toUpperCase() + topic.slice(1)}</h2>
+			<div className="article-list">
 				{articles.map((article) => {
 					return (
 						<Link
@@ -43,8 +43,8 @@ const Topic = () => {
 					);
 				})}
 			</div>
-        </div>
-    );
+		</div>
+	);
 };
 
 export default Topic;
