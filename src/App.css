@@ -49,17 +49,25 @@ a {
 	padding-left: 0;
 }
 
+h3 {
+	font-size: 16px;
+}
+
+.article-li {
+	list-style: none;
+}
+
 .article-container {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	list-style: none;
 }
 
 .article-item {
 	display: flex;
 	flex-direction: column;
-	font-size: 8px;
-	justify-content: space-between;
+	justify-content: space-around;
 	font-family: Arial, Helvetica, sans-serif;
 	align-items: center;
 	text-align: center;
@@ -70,6 +78,7 @@ a {
 	border-radius: 5px;
 	width: 25rem;
 	height: 20rem;
+	padding-top: 5px;
 	padding-bottom: 5px;
 	padding-left: 5px;
 	padding-right: 5px;
@@ -127,7 +136,8 @@ h2 {
 
 .comment {
 	padding: 10px 10px 50px;
-	border: solid red 2px;
+	border: 3px red;
+	border-style: dotted solid solid dotted;
 	margin: 10px 50px 10px 50px;
 }
 
@@ -230,7 +240,8 @@ select {
 .form-container {
 	display: flex;
 	flex-direction: column;
-	border: solid red 2px;
+	border: 3px red;
+	border-style: dotted solid solid dotted;
 	padding: 10px 25px 10px 25px;
 	margin: 10px 50px 10px 50px;
 }
@@ -290,10 +301,26 @@ select {
 	align-items: center;
 	list-style: none;
 	cursor: pointer;
+	height: fit-content;
 }
 
 .sort-form {
 	display: flex;
 	margin-right: 35vw;
 	margin-left: 35vw;
+}
+
+.load-error-msg {
+	padding-top: 35vh;
+	font-size: 25px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+button:disabled {
+	color: black;
+	cursor: initial;
+	pointer-events: none;
+	background-color: gray;
 }

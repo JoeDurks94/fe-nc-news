@@ -72,7 +72,7 @@ const Comments = () => {
 	return isLoading ? (
 		<>
 		<h3>Comments</h3>
-		<p>Please wait, page is loading...</p>
+		<h3 className="load-error-msg">Please wait, page is loading...</h3>
 		</>
 	) : (
 		<>

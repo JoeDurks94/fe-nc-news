@@ -10,6 +10,7 @@ import Article from "./Components/Article";
 import Articles from "./Components/Articles";
 import PostArticle from "./Components/PostArticle";
 import Users from "./Components/Users";
+import IncorrectRoute from "./Components/IncorrectRoute";
 import { getAllTopics } from "./utils/getAllTopics";
 
 const App = () => {
@@ -54,6 +55,7 @@ const App = () => {
 					element={<PostArticle />}
 				></Route>
 				<Route path="/users" element={<Users />}></Route>
+				<Route path="*" element={<IncorrectRoute />}> </Route>
 			</Routes>
 		</>
 	);
