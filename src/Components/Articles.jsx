@@ -23,7 +23,7 @@ const Articles = () => {
 
 	return isLoading ? (
 		<>
-			<p>Please wait, page is loading...</p>
+			<h3 className="load-error-msg">Please wait, page is loading...</h3>
 		</>
 	) : (
 		<>
@@ -47,23 +47,20 @@ const Articles = () => {
 			<ul className="article-list">
 				{articles.map((article) => {
 					return (
-						<Link
-							key={article.article_id}
-							to={`/articles/${article.article_id}`}
-						>
-							<li className="article-item">
-								<p>
-									Created At <br></br>{" "}
-									{new Date(article.created_at).toLocaleDateString()}
-								</p>
+						<li className="article-li">
+								<Link
+									className="article-item"
+									key={article.article_id}
+									to={`/articles/${article.article_id}`}
+								>
 								<img
 									className="img-article-list"
 									src={article.article_img_url}
 								/>
 								<h3>{article.title}</h3>
 								<p>Votes: {article.votes}</p>
+								</Link>
 							</li>
-						</Link>
 					);
 				})}
 			</ul>

@@ -7,6 +7,8 @@ const Topic = () => {
 	const { topic } = useParams();
 	const [isLoading, setIsLoading] = useState(true);
 	const [articles, setArticles] = useState({});
+	const [error, setError] = useState(false)
+	const [errorResponse, setErrorResponse] = useState({})
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -16,11 +18,15 @@ const Topic = () => {
 			})
 			.then(() => {
 				setIsLoading(false);
-			});
+			}).catch((error) => {
+				setError(true)
+				console.log(error)
+				setErrorResponse(error)
+			})
 	}, []);
 
-	return isLoading ? (
-		<p>Please wait page is loading</p>
+	return error ? <h3 className="load-error-msg">Unfortunatley, an error has occured. Please refresh the page and try again  <br></br>{topic.charAt(0).toUpperCase() + topic.slice(1)}{" "}{errorResponse.response.data.msg}</h3> : isLoading ? (
+		<h3 className="load-error-msg" >Please wait, page is loading...</h3>
 	) : (
 		<div>
 			<h2>{topic.charAt(0).toUpperCase() + topic.slice(1)}</h2>

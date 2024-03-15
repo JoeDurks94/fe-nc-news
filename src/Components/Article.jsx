@@ -3,11 +3,12 @@ import { useParams } from "react-router-dom";
 import { getArticleByArticleId } from "../utils/getArticleByArticleId";
 import { upvoteArticle, downvoteArticle } from "../utils/articleVotes";
 import Comments from "./Comments";
-import NewCommentForm from "./NewCommentForm";
 
 const Article = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [article, setArticle] = useState({});
+	const [error, setError] = useState(false)
+	const [errorResponse, setErrorResponse] = useState({})
 	const { article_id } = useParams();
 
 	useEffect(() => {
@@ -18,7 +19,11 @@ const Article = () => {
 			})
 			.then(() => {
 				setIsLoading(false);
-			});
+			}).catch((error) => {
+				setError(true)
+				setErrorResponse(error)
+				console.log(error);
+			})
 	}, []);
 
 	const handleUpvote = (article_id) => {
@@ -43,11 +48,11 @@ const Article = () => {
 		});
 	};
 
-	return isLoading ? (
-		<p>Please wait, page is loading...</p>
+	return error ? <h3 className="load-error-msg">Unfortunatley, an error has occured. Please refresh the page and try again <br></br> <br></br> {errorResponse.response.data.msg}</h3> : isLoading ? (
+		<h3 className="load-error-msg" >Please wait, page is loading...</h3>
 	) : (
 		<>
-			<div className="article-container">
+			 <div className="article-container">
 				<h2>{article.title}</h2>
 				<img className="img-article" src={article.article_img_url} />
 				<p>

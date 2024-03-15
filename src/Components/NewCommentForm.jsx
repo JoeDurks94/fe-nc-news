@@ -24,6 +24,7 @@ const NewCommentForm = ({ setComments, setSelectedUser, selectedUser }) => {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		setSubmitted(true);
+		setSubmitBtnText("Comment Submitted")
 		const body = {
 			username: selectedUser,
 			post: newComment,
@@ -39,12 +40,13 @@ const NewCommentForm = ({ setComments, setSelectedUser, selectedUser }) => {
 			.then(() => {
 				setTimeout(() => {
 					setSubmitted(false);
+					setSubmitBtnText("Submit")
 				}, 1500);
 			});
 	};
 
 	return isLoading ? (
-		<p>Please wait, to post a comment</p>
+		<h3 className="load-error-msg">Please wait, to post a comment</h3>
 	) : (
 		<div className="form-container">
 			<h4>Post a comment</h4>
@@ -53,7 +55,7 @@ const NewCommentForm = ({ setComments, setSelectedUser, selectedUser }) => {
 					<label htmlFor="">
 						Username:{" "}
 						<select
-							onChange={(event) => setSelectedUser(event.target.value)}
+							onChange={(event) => {setSelectedUser(event.target.value)}}
 							name="user"
 							id=""
 							value={selectedUser}
@@ -68,7 +70,7 @@ const NewCommentForm = ({ setComments, setSelectedUser, selectedUser }) => {
 							{" "}
 							Comment:
 							<textarea
-								onChange={(event) => setNewComment(event.target.value)}
+								onChange={(event) => {setNewComment(event.target.value)}}
 								name="comment"
 								id="comment"
 								cols="30"
@@ -76,8 +78,8 @@ const NewCommentForm = ({ setComments, setSelectedUser, selectedUser }) => {
 								value={newComment}
 							></textarea>
 						</label>
-						<button disabled={submitted} className="comment-submit-btn">
-							{submitted ? "Comment Successfully Posted" : "Submit"}
+						<button disabled={newComment === "" || selectedUser === "" ? true : false} className="comment-submit-btn">
+							{newComment === "" || selectedUser === "" ? "Please fill in all field to submit a comment" : "Submit Form"}
 						</button>
 					</label>
 				</form>
