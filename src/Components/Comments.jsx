@@ -79,7 +79,7 @@ const Comments = () => {
 		<h3>Comments</h3>
 			<p className="delete-msg">In order to delete comments please select your username from the dropdown below</p>
 			<NewCommentForm setSelectedUser={setSelectedUser} selectedUser={selectedUser} setComments={setComments} />
-				{comments.map((comment) => {
+				{comments.length > 0 ? comments.map((comment) => {
 					return (
 						<div key={comment.comment_id} className="comment">
 							<div className="topline">
@@ -115,7 +115,7 @@ const Comments = () => {
 						</div>
 						
 					);
-				})}
+				}) : <p className="no-comments-msg">No comments yet, be the first to comment!</p>}
 		</>
 	);
 };
