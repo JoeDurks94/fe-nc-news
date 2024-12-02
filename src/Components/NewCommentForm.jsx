@@ -8,6 +8,8 @@ const NewCommentForm = ({ setComments, setSelectedUser, selectedUser }) => {
 	const [users, setUsers] = useState([]);
 	const [newComment, setNewComment] = useState("");
 	const [submitted, setSubmitted] = useState(false);
+	const [submitBtnText, setSubmitBtnText] = useState("Submit");
+	const [isFormValid, setIsFormValid] = useState(false);
 	const { article_id } = useParams();
 
 	useEffect(() => {
@@ -21,29 +23,34 @@ const NewCommentForm = ({ setComments, setSelectedUser, selectedUser }) => {
 			});
 	}, []);
 
-	const handleSubmit = (event) => {
+	useEffect(() => {
+		const valid = newComment !== "" && selectedUser !== "";
+		setIsFormValid(valid);
+		setSubmitBtnText(valid ? "Submit Form" : "Please fill in all fields to submit a comment");
+	}, [newComment, selectedUser]);
+
+	const handleSubmit = async (event) => {
 		event.preventDefault();
 		setSubmitted(true);
-		setSubmitBtnText("Comment Submitted")
-		const body = {
-			username: selectedUser,
-			post: newComment,
-		};
-		postComment(article_id, body.username, body.post)
-			.then((posted) => {
-				setComments((currentComments) => {
-					return [posted.data, ...currentComments];
-				})
-				setSelectedUser({});
+		setSubmitBtnText("Submitting...");
+
+		try {
+			const posted = await postComment(article_id, selectedUser, newComment);
+			setComments(currentComments => [posted.data, ...currentComments]);
+			
+			setSubmitBtnText("Comment Submitted");
+			setTimeout(() => {
+				setSubmitted(false);
+				setSubmitBtnText("Submit");
+				setSelectedUser({});	
 				setNewComment("");
-			})
-			.then(() => {
-				setTimeout(() => {
-					setSubmitted(false);
-					setSubmitBtnText("Submit")
-				}, 1500);
-			});
-	};
+			}, 1750);
+		} catch (error) {
+			console.log("Failed to post comment", error);
+			setSubmitBtnText("Error submitting comment");
+			setTimeout(() => setSubmitBtnText("Submit"), 1500);
+		}
+	}
 
 	return isLoading ? (
 		<h3 className="load-error-msg">Please wait, to post a comment</h3>
@@ -78,8 +85,8 @@ const NewCommentForm = ({ setComments, setSelectedUser, selectedUser }) => {
 								value={newComment}
 							></textarea>
 						</label>
-						<button disabled={newComment === "" || selectedUser === "" ? true : false} className="comment-submit-btn">
-							{newComment === "" || selectedUser === "" ? "Please fill in all field to submit a comment" : "Submit Form"}
+						<button disabled={!isFormValid} className="comment-submit-btn">
+							{submitBtnText}
 						</button>
 					</label>
 				</form>

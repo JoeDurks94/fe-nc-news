@@ -16,7 +16,7 @@ const Comments = () => {
 		setIsLoading(true);
 		getCommentsByArticleId(article_id)
 			.then((data) => {
-				setComments(data.comments);
+				setComments(data.comments || []);
 			})
 			.then(() => {
 				setIsLoading(false);
