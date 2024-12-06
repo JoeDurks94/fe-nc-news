@@ -44,7 +44,7 @@ const NewCommentForm = ({ setComments, setSelectedUser, selectedUser }) => {
 				setSubmitBtnText("Submit");
 				setSelectedUser({});	
 				setNewComment("");
-			}, 1750);
+			}, 2500);
 		} catch (error) {
 			console.log("Failed to post comment", error);
 			setSubmitBtnText("Error submitting comment");
