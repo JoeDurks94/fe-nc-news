@@ -4,9 +4,10 @@ import { useParams } from "react-router-dom";
 import NewCommentForm from "./NewCommentForm";
 import { upvoteComment, downvoteComment } from "../utils/commentVotes";
 import { deleteComment } from "../utils/deleteComment"
+import { useUser } from "../Contexts/UserContext";
 
 const Comments = () => {
-	const [selectedUser, setSelectedUser] = useState("");
+	const { user } = useUser();
 	const [isLoading, setIsLoading] = useState(true);
 	const [comments, setComments] = useState({});
 	const [deleted, setDeleted] = (useState(false))
@@ -71,14 +72,14 @@ const Comments = () => {
 
 	return isLoading ? (
 		<>
+		{console.log(user)}
 		<h3>Comments</h3>
 		<h3 className="load-error-msg">Please wait, page is loading...</h3>
 		</>
 	) : (
 		<>
 		<h3>Comments</h3>
-			<p className="delete-msg">In order to delete comments please select your username from the dropdown below</p>
-			<NewCommentForm setSelectedUser={setSelectedUser} selectedUser={selectedUser} setComments={setComments} />
+			<NewCommentForm />
 				{comments.length > 0 ? comments.map((comment) => {
 					return (
 						<div key={comment.comment_id} className="comment">
@@ -91,7 +92,7 @@ const Comments = () => {
 								</p>
 							</div>
 							<div className="second-line">
-							<button hidden={selectedUser !== comment.author} disabled={deleted}className="delete-btn" onClick={() => {handleDelete(comment.comment_id)}}>x</button>
+							<button hidden={user?.username !== comment.author} disabled={deleted}className="delete-btn" onClick={() => {handleDelete(comment.comment_id)}}>x</button>
 								<p className="comment-body">{comment.body}</p>
 								<div className="votes-container">
 									<button

@@ -12,6 +12,7 @@ import PostArticle from "./Components/PostArticle";
 import Users from "./Components/Users";
 import IncorrectRoute from "./Components/IncorrectRoute";
 import { getAllTopics } from "./utils/getAllTopics";
+import { UserProvider } from "./Contexts/UserContext";
 
 const App = () => {
 	const [topics, setTopics] = useState({});
@@ -27,12 +28,12 @@ const App = () => {
 
 	return isLoading ? (
 		<>
-			<Header />
 			<NavBar />
 			<p>Please Wait...</p>
 		</>
 	) : (
 		<>
+		<UserProvider>
 			<Header />
 			<NavBar />
 			<Routes>
@@ -57,6 +58,7 @@ const App = () => {
 				<Route path="/users" element={<Users />}></Route>
 				<Route path="*" element={<IncorrectRoute />}> </Route>
 			</Routes>
+			</UserProvider>
 		</>
 	);
 };
